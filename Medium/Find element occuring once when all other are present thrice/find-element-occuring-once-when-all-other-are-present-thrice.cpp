@@ -12,14 +12,25 @@ class Solution {
   public:
     int singleElement(int arr[] ,int N) {
         // code here
-         map <int,int> mp;
-       for(int idx = 0 ; idx < N ; idx++){
-           mp[arr[idx]]++;
-       }
-       for(auto iter : mp){
-           if(iter.second == 1)
-            return iter.first;
-       }
+    sort(arr,arr+N);
+    if(arr[0]!=arr[1])
+        return arr[0];
+    int ptr=0, ct=1;
+    for(int i=1; i<N; i++)
+    {
+        if(arr[i]!=arr[ptr] && ct !=3)
+            return arr[ptr];
+        else if(arr[i]!=arr[ptr] && ct==3)
+        {
+            ptr=i;
+            ct=1;
+        }
+        else
+        {
+            ct++;
+        }
+    }
+    return arr[ptr];
     }
 };
 
